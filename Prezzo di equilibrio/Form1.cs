@@ -16,5 +16,28 @@ namespace Prezzo_di_equilibrio
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tb_q.Text))
+            {
+                MessageBox.Show("Inserisci un valore nella textbox.");    
+            }
+
+            int q = int.Parse(tb_q.Text);
+
+            if(int.TryParse(tb_q.Text, out q) == false)
+            {
+                MessageBox.Show("Inserisci un valore numerico valido.");
+                return;
+            }
+
+            int d = 90- 4*q;    
+            int o = 10 + (q^3/100);
+
+            //non funziona il commit
+
+            MessageBox.Show("Domanda: " + d + "\nOfferta: " + o);
+        }
     }
 }

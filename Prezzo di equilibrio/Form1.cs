@@ -35,7 +35,7 @@ namespace Prezzo_di_equilibrio
             int d = 90- 4*q;    
             int o = 10 + (q^3/100);
 
-            //non funziona il commit
+            int a = 78;
 
             MessageBox.Show("Domanda: " + d + "\nOfferta: " + o);
         }

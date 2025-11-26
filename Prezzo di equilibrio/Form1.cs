@@ -21,6 +21,13 @@ namespace Prezzo_di_equilibrio
 
         private void btn_calcola_Click(object sender, EventArgs e)
         {
+            double q_eq = -1;
+            double prezzo_eq = 0;
+            double differenzaMin = double.MaxValue;
+
+
+
+
             double a = double.Parse(tb_a.Text);
             double b = double.Parse(tb_b.Text);
 
@@ -68,8 +75,22 @@ namespace Prezzo_di_equilibrio
                 offerta.Points.AddXY(q, o);
 
 
+                double diff = Math.Abs(d - o);
+
+                if (diff < differenzaMin)
+                {
+                    differenzaMin = diff;
+                    q_eq = q;
+                    prezzo_eq = (d + o) / 2;
+                }
+
+
+
                 dataGridView1.Rows.Add(q, d.ToString("0.00"), o.ToString("0.00"));
             }
+
+            lbl_qe.Text = q_eq.ToString();
+            lbl_pe.Text = prezzo_eq.ToString("0.000");
         }
     }
 }

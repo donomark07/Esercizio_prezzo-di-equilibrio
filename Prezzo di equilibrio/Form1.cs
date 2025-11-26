@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -23,42 +19,56 @@ namespace Prezzo_di_equilibrio
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart1.Series.Clear();
-            chart1.Titles.Add("Esempio Grafico");
+            
+            double a = 90;   
+            double b = 4;    
 
-            chart1.Series.Add("Domanda");
-            chart1.Series["Domanda"].Color = Color.Green;
-            chart1.Series["Domanda"].ChartType = SeriesChartType.Point;
-
-            chart1.Series.Add("Offerta");
-            chart1.Series["Offerta"].Color = Color.Blue;
-            chart1.Series["Offerta"].ChartType = SeriesChartType.Point;
-
-            chart1.Series["Domanda"].Points.AddXY(1, 40);
-            chart1.Series["Domanda"].Points.AddXY(2, 60);
-            chart1.Series["Domanda"].Points.AddXY(3, 80);
-            chart1.Series["Domanda"].Points.AddXY(4, 100);
-            chart1.Series["Offerta"].Points.AddXY(5, 110);
-            chart1.Series["Offerta"].Points.AddXY(6, 80);
-            chart1.Series["Offerta"].Points.AddXY(7, 70);
-
-
-            //DOANDA 
-            double B2 = 90;  
-            double B3 = 4;
-
-            //OFFERTA
-            double C1 = 10;     
-            double C2 = 0.01;   
-            double C3 = 3;
+           
+            double c = 10;     
+            double f = 100;   
+            double g = 3;      
 
             
             chart1.Series.Clear();
             chart1.ChartAreas[0].AxisX.Title = "Quantità";
             chart1.ChartAreas[0].AxisY.Title = "Prezzo";
             chart1.Titles.Clear();
-            chart1.Titles.Add("Domanda e Offerta - Prezzo di Equilibrio");
+            chart1.Titles.Add("Domanda e Offerta");
 
+            Series domanda = new Series("Domanda");
+            domanda.ChartType = SeriesChartType.Line;
+            domanda.Color = Color.Green;
+            domanda.BorderWidth = 3;
+
+            Series offerta = new Series("Offerta");
+            offerta.ChartType = SeriesChartType.Line;
+            offerta.Color = Color.Blue;
+            offerta.BorderWidth = 3;
+
+            chart1.Series.Add(domanda);
+            chart1.Series.Add(offerta);
+
+           
+            dataGridView1.Columns.Clear();
+            dataGridView1.Rows.Clear();
+
+            dataGridView1.Columns.Add("q", "Quantità");
+            dataGridView1.Columns.Add("d", "Domanda");
+            dataGridView1.Columns.Add("o", "Offerta");
+
+           
+            for (int q = 0; q <= 20; q++)
+            {
+                double d = a - (b * q);                  
+                double o = c + (  Math.Pow(q, f)/g);    
+
+                
+                domanda.Points.AddXY(q, d);
+                offerta.Points.AddXY(q, o);
+
+               
+                dataGridView1.Rows.Add(q, d.ToString("0.00"), o.ToString("0.00"));
+            }
         }
     }
 }

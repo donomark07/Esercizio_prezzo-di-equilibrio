@@ -17,18 +17,19 @@ namespace Prezzo_di_equilibrio
 
 
 
-        private void Form1_Load(object sender, EventArgs e)
+       
+
+        private void btn_calcola_Click(object sender, EventArgs e)
         {
-            
-            double a = 90;   
-            double b = 4;    
+            double a = double.Parse(tb_a.Text);
+            double b = double.Parse(tb_b.Text);
 
-           
-            double c = 10;     
-            double f = 100;   
-            double g = 3;      
 
-            
+            double c = double.Parse(tb_c.Text);
+            double f = double.Parse(tb_f.Text);
+            double g = double.Parse(tb_g.Text);
+
+
             chart1.Series.Clear();
             chart1.ChartAreas[0].AxisX.Title = "Quantità";
             chart1.ChartAreas[0].AxisY.Title = "Prezzo";
@@ -48,7 +49,7 @@ namespace Prezzo_di_equilibrio
             chart1.Series.Add(domanda);
             chart1.Series.Add(offerta);
 
-           
+
             dataGridView1.Columns.Clear();
             dataGridView1.Rows.Clear();
 
@@ -56,17 +57,17 @@ namespace Prezzo_di_equilibrio
             dataGridView1.Columns.Add("d", "Domanda");
             dataGridView1.Columns.Add("o", "Offerta");
 
-           
+
             for (int q = 0; q <= 20; q++)
             {
-                double d = a - (b * q);                  
-                double o = c + (  Math.Pow(q, f)/g);    
+                double d = a - (b * q);
+                double o = c + (Math.Pow(q, f) / g);
 
-                
+
                 domanda.Points.AddXY(q, d);
                 offerta.Points.AddXY(q, o);
 
-               
+
                 dataGridView1.Rows.Add(q, d.ToString("0.00"), o.ToString("0.00"));
             }
         }

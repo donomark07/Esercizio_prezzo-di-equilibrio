@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Prezzo_di_equilibrio
 {
@@ -19,46 +20,19 @@ namespace Prezzo_di_equilibrio
 
 
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
-           
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(tb_q.Text))
-            {
-                MessageBox.Show("Inserisci un valore nella textbox.");    
-            }
-
-            int q = int.Parse(tb_q.Text);
-
-            if(int.TryParse(tb_q.Text, out q) == false)
-            {
-                MessageBox.Show("Inserisci un valore numerico valido.");
-                return;
-            }
-
-            int d = 90- 4*q;    
-            int o = 10 + (q^3/100);
-
-            int a = 78;
-
-            MessageBox.Show("Domanda: " + d + "\nOfferta: " + o);
-
-
-
             chart1.Series.Clear();
-            chart1.Titles.Add("Grafico domanda-offerta");
+            chart1.Titles.Add("Esempio Grafico");
 
             chart1.Series.Add("Domanda");
             chart1.Series["Domanda"].Color = Color.Green;
-            chart1.Series["Domanda"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            chart1.Series["Domanda"].ChartType = SeriesChartType.Point;
 
             chart1.Series.Add("Offerta");
             chart1.Series["Offerta"].Color = Color.Blue;
-            chart1.Series["Offerta"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            chart1.Series["Offerta"].ChartType = SeriesChartType.Point;
 
             chart1.Series["Domanda"].Points.AddXY(1, 40);
             chart1.Series["Domanda"].Points.AddXY(2, 60);
@@ -67,6 +41,24 @@ namespace Prezzo_di_equilibrio
             chart1.Series["Offerta"].Points.AddXY(5, 110);
             chart1.Series["Offerta"].Points.AddXY(6, 80);
             chart1.Series["Offerta"].Points.AddXY(7, 70);
+
+
+            //DOANDA 
+            double B2 = 90;  
+            double B3 = 4;
+
+            //OFFERTA
+            double C1 = 10;     
+            double C2 = 0.01;   
+            double C3 = 3;
+
+            
+            chart1.Series.Clear();
+            chart1.ChartAreas[0].AxisX.Title = "Quantità";
+            chart1.ChartAreas[0].AxisY.Title = "Prezzo";
+            chart1.Titles.Clear();
+            chart1.Titles.Add("Domanda e Offerta - Prezzo di Equilibrio");
+
         }
     }
 }
